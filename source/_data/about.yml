@@ -1,0 +1,152 @@
+- class_name: 关于页
+  subtitle: 生活明朗，万物可爱✨
+  avatarImg: https://bu.dusays.com/2025/03/04/67c6a84ca476d.jpg
+  avatarSkills:
+    left:
+      - 🤖️ 数码科技爱好者
+      - 🔍 分享与热心帮助
+      - 🏠 新时代有梦社畜
+      - 🔨 设计开发一条龙
+    right:
+      - 专修交互与设计 🤝
+      - 脚踏实地行动派 🏃
+      - 团队小组发动机 🧱
+      - 壮汉人不狠话多 😐
+  name: Morning
+  description: 是一名 前端工程师、学生、独立开发者
+  aboutsiteTips:
+    tips: 追求
+    title1: 源于
+    title2: 梦想而去 感受
+    word:
+      - 学习
+      - 生活
+      - 磨难
+      - 枯燥
+  helloAbout: Morning！
+  skillsTips:
+    tips: 技能
+    title: 开启创造力
+  careers:
+    tips: 生涯
+    title: 无限进步
+    list:
+      - desc: EDU,数据科学专业
+        color: "#357ef5"
+      - desc: EDU,数据科学专业
+        color: "#357ef5"
+      - desc: EDU,数据科学专业
+        color: "#357ef5"
+    img: https://bu.dusays.com/2023/04/21/644287166329b.png
+  statistic:
+    link: /archives
+    text: 文章隧道
+    cover: https://bu.dusays.com/2023/05/01/644f4b037b930.jpg
+  map:
+    title: 我现在住在
+    StrengthenTitle: 中国，郑州
+    background: https://bu.dusays.com/2025/03/04/67c6ab5590071.png
+    backgroundDark: https://bu.dusays.com/2025/03/04/67c6abc3114cb.png
+  selfInfo:
+    selfInfoTips1: 生于
+    selfInfoContentYear: 2005
+    selfInfoTips2: 兰州大学
+    selfInfoContent2: 计算机科学与技术（数据科学）
+    selfInfoTips3: 现在职业
+    selfInfoContent3: 大二学生👨‍🎓
+  personalities:
+    author_name: 提倡者
+    personality_type: INFJ-A
+    photo_url: https://bu.dusays.com/2025/03/04/67c6abc3114cb.png
+    personality_img: https://bu.dusays.com/2025/03/04/67c6aee928214.png
+    name_url: https://www.16personalities.com/ch/infj-%E4%BA%BA%E6%A0%BC
+  maxim:
+    maxim_tips: 座右铭
+    maxim_top: 一时是小丑，
+    maxim_bottom: 一辈子是小丑(。_。)。
+  buff:
+    buff_tips: 特长
+    buff_top: 脑回路新奇的 Morning
+    buff_bottom: 二次元指数 MAX
+  game:
+    game_tips: 爱好游戏
+    game_title: 瓦(ง •_•)ง
+    game_uid: "ID: Morning51609"
+    game_bg: https://img.zcool.cn/community/0318ytaehae3jlxzjcsjltk3836.png
+  comic:
+    comic_tips: 爱好番剧
+    comic_title: 追番
+    comic_list:
+      - name: 约定的梦幻岛
+        href: https://www.bilibili.com/bangumi/media/md5267750/?spm_id_from=666.25.b_6d656469615f6d6f64756c65.1
+        cover: https://bu.dusays.com/2023/05/27/647166c44b414.webp
+      - name: 百变小樱
+        href: https://www.bilibili.com/bangumi/play/ss3756?spm_id_from=333.1387.0.0
+        cover: https://th.bing.com/th/id/R.e89254abd026adcae1792f2c3b9578df?rik=ITSDEli1ICdRRg&riu=http%3a%2f%2fi.gtimg.cn%2fqqlive%2fimg%2fjpgcache%2ffiles%2fqqvideo%2fw%2fwplx79f0v0dlop3.jpg&ehk=r3EhyXQsk45yKJNWLAzl6uus3ls60y827aSkMCVq6qs%3d&risl=&pid=ImgRaw&r=0
+      - name: 双城之战
+        href: https://www.bilibili.com/bangumi/play/ep1113585
+        cover: https://th.bing.com/th?id=OIP.dh2lqNXnCrYEKj8mLXTdGgHaKZ&w=198&h=280&c=10&rs=1&qlt=99&bgcl=fffffe&r=0&o=6&dpr=1.5&pid=23.1
+      - name: 咒术回战
+        href: https://www.bilibili.com/bangumi/media/md28229899/?spm_id_from=666.25.b_6d656469615f6d6f64756c65.1
+        cover: https://bu.dusays.com/2023/05/24/646db4398832e.webp
+      - name: 辉夜大小姐
+        href: https://www.bilibili.com/bangumi/play/ss26274?spm_id_from=333.1387.0.0
+        cover: https://th.bing.com/th/id/OIP.y2sEuqMJ7SWvhbLFPDUmZQHaKe?w=202&h=286&c=7&r=0&o=5&dpr=1.5&pid=1.7
+  like:
+    like_tips: 关注偏好
+    like_title: 新鲜事物
+    like_bg: https://bu.dusays.com/2022/12/06/638f5f05ce1f7.jpg
+    like_bottom: 手机、电脑软硬件
+  music:
+    music_tips: 音乐偏好
+    music_title: 乐队、摇滚、刺猬
+    music_bg: https://p2.music.126.net/Mrg1i7DwcwjWBvQPIMt_Mg==/79164837213438.jpg
+    music_link: /music
+  # reward_list:
+  #   - name: 海阔蓝
+  #     amount: 8.8
+  #     datatime: 2023-03-28
+  #   - name: LK66
+  #     amount: 66.6
+  #     datatime: 2023-03-24
+  #   - name: 张时貳
+  #     amount: 6.6
+  #     datatime: 2023-01-22
+  #   - name: ZeroAf
+  #     amount: 9.9
+  #     datatime: 2022-12-14
+  #   - name: LuckyWangXi
+  #     amount: 6.6
+  #     datatime: 2022-12-14
+  #   - name: 刀中日月长
+  #     amount: 10
+  #     datatime: 2022-11-16
+  #   - name: 鹿啵包
+  #     amount: 10
+  #     datatime: 2022-11-08
+  #   - name: 疾速k
+  #     amount: 50
+  #     datatime: 2022-09-20
+  #   - name: 伴舟先生大霖子
+  #     amount: 4.03
+  #     datatime: 2022-10-27
+  #     suffix: 贝壳
+  #   - name: Magica_0x0
+  #     amount: 3.36
+  #     datatime: 2022-10-07
+  #     suffix: 贝壳
+  #   - name: 名字就是要短像这样
+  #     amount: 3.36
+  #     datatime: 2022-08-25
+  #     suffix: 贝壳
+  #   - name: Leviathan520
+  #     amount: 1.34
+  #     datatime: 2022-08-23
+  #     suffix: 贝壳
+  #   - name: 托马斯
+  #     amount: 10
+  #     datatime: 2022-08-19
+  #   - name: 哇是猫猫欸
+  #     amount: 1.34
+  #     datatime: 2022-08-19
+  #     suffix: 贝壳
