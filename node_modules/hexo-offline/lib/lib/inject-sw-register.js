@@ -1,0 +1,32 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _fs = _interopRequireDefault(require("fs"));
+var _path = _interopRequireDefault(require("path"));
+var _constants = require("./constants.js");
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const template = _fs.default.readFileSync(_path.default.join(__dirname, "./template.js"), "utf-8");
+const helperSWRegister = function () {
+  const registerContent = template.replace("__workerName__", _constants.workerName);
+  return `<script>${registerContent}</script>`;
+};
+const injectSWRegisterWithContent = script => publicDir => {
+  const indexHTMLPath = _path.default.join(publicDir, "index.html");
+
+  // early return when no index.html presets in public directory
+  if (!_fs.default.existsSync(indexHTMLPath)) {
+    return;
+  }
+  const fileContent = _fs.default.readFileSync(indexHTMLPath, "utf-8");
+
+  // early return if it has been injected before
+  if (fileContent.includes(`${script}</body></html>`)) {
+    return;
+  }
+  const injectedContent = fileContent.replace(/<\/body>\s*<\/html>\s*$/, `${script}</body></html>`);
+  _fs.default.writeFileSync(indexHTMLPath, injectedContent);
+};
+var _default = exports.default = injectSWRegisterWithContent(helperSWRegister());
