@@ -100,7 +100,7 @@ ignore:
 
 # 主题更换为安知鱼
 # theme: landscape
-theme: ./themes/anzhiyu
+theme: anzhiyu
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
