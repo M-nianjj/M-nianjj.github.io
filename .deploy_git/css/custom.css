@@ -1,0 +1,21 @@
+/* 白天网站背景 */
+#web_bg {
+    /* background-color: #FFF9E3 !important; /* 非常淡的黄色 */
+    /* background-image: none !important; 移除背景图片 */
+    /* 白天网站背景 */
+    background-size: 20rem;
+    background-image: url(https://blog.xiowo.net//img/bg.svg) !important;
+    background-repeat: initial
+}
+
+
+/* 夜间网站背景 */
+[data-theme=dark] #web_bg {
+    background-size: contain; /* 让背景图片宽度充满整个页面，高度按比例缩放 */
+    background-position: top center; /* 让图片居中显示 */
+    background-attachment: fixed; /* 让背景固定，不随页面滚动 */
+    background-image: url(https://bu.dusays.com/2025/03/18/67d8d9fa462ee.jpg) !important;
+    background-repeat: no-repeat; /* 禁止重复 */
+    background-color: #000000; /* 可选：如果图片高度不足，可以填充背景色 */
+}
+
