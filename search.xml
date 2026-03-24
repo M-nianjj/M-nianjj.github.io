@@ -4,52 +4,25 @@
   
     
     <entry>
-      <title>文章测试1</title>
-      <link href="/2026/03/20/Test1/h"/>
-      <url>/2026/03/20/Test1/h</url>
+      <title>数模竞赛算法讲解（评价类算法）</title>
+      <link href="/2026/03/24/%E6%95%B0%E6%A8%A1/h"/>
+      <url>/2026/03/24/%E6%95%B0%E6%A8%A1/h</url>
       
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="数学建模算法总结（快速了解使用）"><a href="#数学建模算法总结（快速了解使用）" class="headerlink" title="数学建模算法总结（快速了解使用）"></a>数学建模算法总结（快速了解使用）</h1><hr><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本系列文章目的在于帮助新人迅速了解数模比赛常用算法（概念+使用场景）不会对底层的数学原理有过多解释。</p><hr><h1 id="第一章-数模评价类算法"><a href="#第一章-数模评价类算法" class="headerlink" title="第一章 数模评价类算法"></a>第一章 数模评价类算法</h1><p>@<a href="%E7%9B%AE%E5%BD%95">TOC</a></p><hr><h2 id="一、层次分析法（AHP）"><a href="#一、层次分析法（AHP）" class="headerlink" title="一、层次分析法（AHP）"></a>一、层次分析法（AHP）</h2><p>概述：层次分析法是一种将复杂问题分解成多个层次进行分析的多准则决策方法，通过构建判断矩阵和计算特征向量来确定各准则的权重。<br>使用场景：决策分析、资源分配、优先级排序等，如项目评估、风险评估、供应链管理。（比如：小明希望去电影院找到自己潜在最喜欢的电影，他可能需要对已有的多个电影的多个特征进行评估。每个人对灯光，画质，音质，剧情和特效的重视程度并不相同，层次分析法便可以用于对多个对象的多个特征进行分析选出最优解）</p><hr><h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="&lt;1&gt;使用步骤"></a>&lt;1&gt;使用步骤</h3><h4 id="1-构造判断矩阵"><a href="#1-构造判断矩阵" class="headerlink" title="1. 构造判断矩阵"></a>1. 构造判断矩阵</h4><p>前面提到，不同人对电影不同特征的重视程度并不相同，我们需要一种方式将不同特征的重视值量化到矩阵中用于层次分析法处理。所以，为了简化思维过程，我们首先进行评价指标的两两比较，再将比较结果汇总成最终的权重。为了量化两两比较的结果，我们要祭出一个评价体系表格说白了，就是在A和B两者比较中划分了一个1到9的重要等级。<br><img src="https://bu.dusays.com/2026/03/24/69c1ff2e597b7.png" alt="Alt"></p><p>直接看可能无法清晰的理解，让我们带入实际中运用这个表格。<br>巴乔（化名）是位资深二次元，对于一个动漫电影，他更加关心的是他厨的老婆特效做的好不好看而不是故事的剧情，这时候特效对于剧情就有更大的权重，下面是以剧情，特效，音效三个元素构建的判断矩阵。</p><table><thead><tr><th align="center"></th><th align="center">剧情</th><th align="center">特效</th><th align="center">音效</th></tr></thead><tbody><tr><td align="center">剧情</td><td align="center">1</td><td align="center">1&#x2F;5</td><td align="center">2</td></tr><tr><td align="center">特效</td><td align="center">5</td><td align="center">1</td><td align="center">6</td></tr><tr><td align="center">音效</td><td align="center">1&#x2F;2</td><td align="center">1&#x2F;6</td><td align="center">1</td></tr></tbody></table><p>上述的表格就是一个判断矩阵，我们可以看到这个判断矩阵有三个特点，对角线都为1，而且对角线对称的元素相乘都为1，这样的矩阵也被称为正互反矩阵。</p><p>但是，判断矩阵同样也会出现问题（特别是在特征值较多的情况下）上面的表格中我们可以清晰的看出巴乔对于动漫电影的的重要性排序中 【特效&gt;剧情&gt;音效】，但如果出现【特效＞剧情，剧情＞音效，音效＞特效】的情况，表格就会出现矛盾（我们无法量化出准确的数值用于重要性排序），也就是评价不一致，对于该问题，我们引出了下一步骤，一致性检验。</p><h4 id="2-一致性检验"><a href="#2-一致性检验" class="headerlink" title="2.一致性检验"></a>2.一致性检验</h4><p>这里我们简单引用下线性代数中的定理</p><ol><li>若A为一致性矩阵，则A的最大特征值λ_max⁡ &#x3D; n，其中n为矩阵A的阶，A的其余特征值均为0</li><li>n阶正互反矩阵为一致性矩阵，当且仅当其最大特征值λ_max⁡ &#x3D; n，并且当正互反矩阵非一致时，必有λ_max⁡ &gt; n。</li></ol><p>通过以上概念我们得以定义出一致性指标CI，CI &#x3D; (λ_max – n) &#x2F; (n -1)。也就是说一致性指标CI越大，整个矩阵就越不一致，当CI是0的时候是完全理想的一直矩阵。</p><p>为了得到计算出来的一致性指标到底是大还是小，我们又构建了平均随机一致性指标RI，该指标的构建方法是随机构建1000个正互反矩阵，并计算一致性指标的平均值。这里的RI也就是说当矩阵的阶数为n的时候随机的平均一致性。这相当于一把尺子，告诉大家如果完全随机（瞎蒙）的填写这个判断矩阵的结果的话，那么你的一致性指标的期望就大概是这个RI的值。RI的值通过查表即可得出：Alt<br>当CI和RI的比值小于0.1的时候，我们认为这个矩阵是一致的，也就是说你矩阵的一致性指标，要比平均的瞎蒙的一致性指标小一个数量级的时候，我们认为你就不是乱猜的了。这样我们就构建了我们的一致性比例CR &#x3D; CI&#x2F; RI。如果说一个正互反矩阵的一致性比例没有小于0.1，那么就需要调整矩阵以满足要求。</p><p>当表格通过一致性检验后，我们就有理由认为，我们对于特征的评价是合理的，但是现有的表格过于粗略和随意，我们需要对他进行进一步的处理使计算机得以合理的计算出权重综合后的结果。</p><h4 id="3-一致性检验通过的判断矩阵求权重"><a href="#3-一致性检验通过的判断矩阵求权重" class="headerlink" title="3.一致性检验通过的判断矩阵求权重"></a>3.一致性检验通过的判断矩阵求权重</h4><p>得到了合理的判断矩阵我们这里就要计算每个影响因素所占的权重，这里主要有三种方法，算数平均法，几何平均法，和特征值法求权重。<br>以下是不同方法的优缺点（实际比赛中可以使用多种方法比较预测效果，这在数模比赛中也是加分点）。</p><hr><p>算术平均法<br>优点：简单易懂，计算方便。<br>缺点：对判断矩阵的次序不敏感，可能导致权重的精确性不高。</p><hr><p>几何平均法<br>优点：对判断矩阵的对称性有较好的处理能，能够较好地反映相对重要性的比例关系。<br>缺点：计算相对复杂。（对于计算机就不是缺点，反正不是你算的）</p><hr><p>特征值法<br>优点：能够处理复杂的判断矩阵，理论基础扎实，能够反映判断矩阵的内在一致性。<br>缺点：同几何平均法。</p><hr><h3 id="总结"><a href="#总结" class="headerlink" title="&lt;2&gt;总结"></a>&lt;2&gt;总结</h3><p>层次分析法多用于处理多个特征对结果产生影响的场景（评选，决策），但是需要注意层次分析法考虑的因素不能过多，不论是候选的种类，还是评价的指标都不能太多否则结果的好坏会大打折扣。该方法一般出现在竞赛中的第一小问，在后续问题中不建议使用此方法（太垃圾了，一般都解决不了问题）<br>需要注意的是，层次分析法一般用于所有对象的评价标准一致的情况。例如：上文中巴乔对动漫电影的特征重视程度为特效&gt;剧情&gt;音效，但是对于歌剧类电影，人们往往会更加注重音效。（不会有人注重哥斯拉的剧情，或者生活向电影的特效，当这些电影同时出现在备选栏中简单的判断矩阵就不能满足复杂的判断情况了）对于这类复杂的情况，简单的层次分析并无法适用。</p><h2 id="二、TOPSIS（优劣解距离法）"><a href="#二、TOPSIS（优劣解距离法）" class="headerlink" title="二、TOPSIS（优劣解距离法）"></a>二、TOPSIS（优劣解距离法）</h2><p>概述：TOPSIS法通过计算各方案与理想解和负理想解的距离来进行评价排序，以选择最优方案。<br>使用场景：用于多准则决策分析，如供应商选择、投资决策、技术评估等。</p><p>上文提到，我们可以通过层次分析法（AHP）解决一些较主观的决策问题，但是当面对方案层较多的情况时（通过多个指标评价多条河流水质情况的问题），模型很难通过一致性检验，预测效果也会大大折扣。生活中，河流中不同元素的指标类型往往并不相同（含氧量往往越大越好，有害菌数量越少越好，ph值越趋近于中性越好…）这些指标往往客观存在且数量较多，而topsis便是解决这类问题的一种综合评价方法，它既可以充分利用原始数据，又能反应不同流域的水质差距，且计算过程简单，模型无需检验（省了一步还不容易出问题，数模比赛写就完了，不可能判错的），数据真实可靠。</p><h3 id="使用步骤-1"><a href="#使用步骤-1" class="headerlink" title="&lt;1&gt;使用步骤"></a>&lt;1&gt;使用步骤</h3><h4 id="1-原始矩阵正向化（即统一转化为极大指标）"><a href="#1-原始矩阵正向化（即统一转化为极大指标）" class="headerlink" title="1. 原始矩阵正向化（即统一转化为极大指标）"></a>1. 原始矩阵正向化（即统一转化为极大指标）</h4><p>上文提到，关于河流质量的评判指标大概有四种，分别是极小型指标，极大型指标，区间型指标，中间型指标。我们需要将这些指标统一转换为极大指标（为后续模型综合指标做出评价做准备）。</p><p>1）极小型指标：转换方式为max-x或者1&#x2F;x。</p><p>2）中间型指标：中间型指标指其数值在某个中间值时为其最佳值，例如PH值，PH&#x3D;7即为其中间值（最佳值）。其转换方法如下。<br><img src="https://bu.dusays.com/2026/03/24/69c1ff5eb7434.png" alt=""></p><p>3）区间型指标：  区间型指标指其数值落在某一个区间内时均为最佳值，例如人的体温区间为[36,37.2]。假设其最佳区间为[a,b]，则其转换方法如下。<img src="https://bu.dusays.com/2026/03/24/69c1ff6be505e.png" alt=""></p><h4 id="2-正向化矩阵标准化"><a href="#2-正向化矩阵标准化" class="headerlink" title="2. 正向化矩阵标准化"></a>2. 正向化矩阵标准化</h4><p>在完成了矩阵正向化后，在评价之前我们需要指定评价方法并统一评分，规则否则可能造成尺度混乱（有些指标数值过大有些指标数值过小，导致数值小的指标特征不明显）。在这里，我们引入标准化处理的概念。</p><p>标准化处理：为了消去不同指标量纲的影响，需要对已经正向化的矩阵进行标准化处理<img src="https://bu.dusays.com/2026/03/24/69c1ff8193ad4.png" alt="在这里插入图片描述"></p><h4 id="3-计算得分并归一化"><a href="#3-计算得分并归一化" class="headerlink" title="3. 计算得分并归一化"></a>3. 计算得分并归一化</h4><p>经过以上两步对评价指标的处理后，我们便可以开始对对象开始评价。<br>多个指标：z与最小值的矩阵&#x2F;z与最大值的距离+z与最小值的距离。<br><img src="https://bu.dusays.com/2026/03/24/69c1ff95c51d8.png" alt=""><br>这部分公式较抽象，想直接拿来用不用深究其原理，计算过程可以参考下面b站的这个视频。<br><a href="https://bu.dusays.com/2026/03/24/69c1ff95c51d8.png">B站topsis教学视频</a></p><h3 id="topsis总结"><a href="#topsis总结" class="headerlink" title="&lt;2&gt;topsis总结"></a>&lt;2&gt;topsis总结</h3><p>topsis在处理非主观，评价指标和对象较多的情况时效果更好。相较于层次分析法，其更着重对原始数据的使用和发掘，也省略了一致性检测的过程，受主观因素的影响程度小。在处理一些类似水质检测，质量检测，产品质量的问题时更加简便有效。需要注意的是，topsis处理的问题往往是评价指标已经给出的（比如最佳ph值为7）。topsis还能与熵权法结合，改变不同评价指标的权重（比如，政府部门认为河流的清澈程度重要性大于大肠杆菌数量限制的重要性，清澈度这一评价指标的权重就可能更高，这里不做过多介绍）。</p><h2 id="三、熵权法"><a href="#三、熵权法" class="headerlink" title="三、熵权法"></a>三、熵权法</h2><p>上文中提到，topsis可以与熵权法结合，客观的去强调那些差值与起伏更大的数据。与其说熵权法是一种新的评价方法，倒不如说熵权法是一种模型中的插件。上文中提到的AHP与TOPSIS算法从本质意义上来讲，都不是完全非主观的算法（毕竟topsis用到的各种指标也是各种专家认为制定的）。熵权法的出现，使模型从真正意义上来说，实现了客观的权重调整。比如，当几个河流的有害菌数目差不多，有益菌的数量差值更大时，我们有理由将有益菌数量这一指标看的更加重要。熵权法的出现，就客观的实现了这一过程。</p><h3 id="使用步骤-2"><a href="#使用步骤-2" class="headerlink" title="使用步骤"></a>使用步骤</h3><p>熵权法可分为两步（本质上其实是一步），分别是熵与权重的计算。高中物理上提到，熵是用来衡量一个系统稳定程度的指标。一个系统的熵值越大，证明该系统越不稳定。在题目环境中也就说明了，该指标可能是更有决定性更重要的指标。我们理所应当为其赋予更大的权重。</p><h4 id="1-熵的计算"><a href="#1-熵的计算" class="headerlink" title="1. 熵的计算"></a>1. 熵的计算</h4><p><img src="https://bu.dusays.com/2026/03/24/69c1ffa73d09a.png" alt="在这里插入图片描述"></p><h4 id="2-权重计算"><a href="#2-权重计算" class="headerlink" title="2. 权重计算"></a>2. 权重计算</h4><p><img src="https://bu.dusays.com/2026/03/24/69c1ffad35a05.png" alt="在这里插入图片描述"><br>通过熵权法计算出来的权重乘以指标便可以客观的调整各指标权重。</p><h2 id="四、Topsis与熵权法结合代码示例"><a href="#四、Topsis与熵权法结合代码示例" class="headerlink" title="四、Topsis与熵权法结合代码示例"></a>四、Topsis与熵权法结合代码示例</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 导入数据,假设为电影评价模型，导入三部电影数据差评，特效，剧情，人数(50为最优)</span></span><br><span class="line">data = np.array([</span><br><span class="line">    [<span class="number">58</span>,<span class="number">110</span>,<span class="number">120</span>,<span class="number">80</span>],</span><br><span class="line">    [<span class="number">12</span>,<span class="number">58</span>,<span class="number">110</span>,<span class="number">12</span>],</span><br><span class="line">    [<span class="number">23</span>,<span class="number">42</span>,<span class="number">119</span>,<span class="number">58</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.规定指标正负向性，或者目标值</span></span><br><span class="line">positive_direction = [<span class="literal">False</span>, <span class="literal">True</span>, <span class="literal">True</span>, <span class="literal">None</span>]</span><br><span class="line">target_value = [<span class="literal">None</span>, <span class="literal">None</span>, <span class="literal">None</span>, <span class="number">50</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.数据正向化（包括目标值优化）</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">positive_transform</span>(<span class="params">data, positive_direction, target_value</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(data.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="comment"># 取差值绝对值，目标优化</span></span><br><span class="line">        <span class="keyword">if</span> positive_direction[i] <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            data[:, i] = np.<span class="built_in">max</span>(np.<span class="built_in">abs</span>(data[:, i] - target_value[i])) - np.<span class="built_in">abs</span>(data[:, i] - target_value[i])</span><br><span class="line">        <span class="comment"># 负向指标，最大减最小</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="keyword">not</span> positive_direction[i]:</span><br><span class="line">            data[:, i] = np.<span class="built_in">max</span>(data[:, i]) - data[:, i]</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"><span class="comment"># 4.数据标准化与归一化</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize_data</span>(<span class="params">data</span>):</span><br><span class="line">    <span class="comment"># 第一步进行标准化</span></span><br><span class="line">    norm_data = data / np.sqrt(np.<span class="built_in">sum</span>(data**<span class="number">2</span>, axis=<span class="number">0</span>))</span><br><span class="line">    <span class="comment"># 第二步：进一步除以每列的和，使得矩阵变为概率矩阵</span></span><br><span class="line">    norm_data = norm_data / np.<span class="built_in">sum</span>(norm_data, axis=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> norm_data</span><br><span class="line"><span class="comment"># 步骤2：数据标准化 (归一化)</span></span><br><span class="line"><span class="comment"># def normalize_data(data):</span></span><br><span class="line"><span class="comment">#     min_vals = np.min(data, axis=0)</span></span><br><span class="line"><span class="comment">#     max_vals = np.max(data, axis=0)</span></span><br><span class="line"><span class="comment">#     norm_data = (data - min_vals) / (max_vals - min_vals)</span></span><br><span class="line"><span class="comment">#     return norm_data</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;经过处理后的矩阵数据&#x27;</span>)</span><br><span class="line">positive_transform(data, positive_direction, target_value)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line">data = normalize_data(data)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 计算熵值</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_entropy</span>(<span class="params">data</span>):</span><br><span class="line">    p = data / np.<span class="built_in">sum</span>(data, axis=<span class="number">0</span>)</span><br><span class="line">    p = np.where(p == <span class="number">0</span>, <span class="number">1e-10</span>, p)  <span class="comment"># 避免log(0)</span></span><br><span class="line">    entropy = -np.<span class="built_in">sum</span>(p * np.log(p), axis=<span class="number">0</span>) / np.log(<span class="built_in">len</span>(data))</span><br><span class="line">    <span class="keyword">return</span> entropy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 计算权重</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_weights</span>(<span class="params">entropy</span>):</span><br><span class="line">    weights = (<span class="number">1</span> - entropy) / (<span class="number">1</span> - np.<span class="built_in">sum</span>(entropy))</span><br><span class="line">    <span class="keyword">return</span> weights</span><br><span class="line"></span><br><span class="line"><span class="comment"># 7. topsis计算</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">topsis</span>(<span class="params">data, weights</span>):</span><br><span class="line">    weighted_data = data * weights</span><br><span class="line">    ideal_best = np.<span class="built_in">max</span>(weighted_data, axis=<span class="number">0</span>)  <span class="comment"># 理想最优解</span></span><br><span class="line">    ideal_worst = np.<span class="built_in">min</span>(weighted_data, axis=<span class="number">0</span>)  <span class="comment"># 理想最劣解</span></span><br><span class="line"></span><br><span class="line">    dist_best = np.sqrt(np.<span class="built_in">sum</span>((weighted_data - ideal_best) ** <span class="number">2</span>, axis=<span class="number">1</span>))  <span class="comment"># 与最优解的距离</span></span><br><span class="line">    dist_worst = np.sqrt(np.<span class="built_in">sum</span>((weighted_data - ideal_worst) ** <span class="number">2</span>, axis=<span class="number">1</span>))  <span class="comment"># 与最劣解的距离</span></span><br><span class="line"></span><br><span class="line">    score = dist_worst / (dist_best + dist_worst)  <span class="comment"># 计算得分</span></span><br><span class="line">    <span class="keyword">return</span> score</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主函数调用</span></span><br><span class="line">transformed_data = positive_transform(data, positive_direction, target_value)</span><br><span class="line">norm_data = normalize_data(transformed_data)  <span class="comment"># 归一化数据</span></span><br><span class="line">entropy = calculate_entropy(norm_data)</span><br><span class="line">weights = calculate_weights(entropy)</span><br><span class="line">scores = topsis(norm_data, weights)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;各方案的得分:&quot;</span>, scores)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;最优方案的索引:&quot;</span>, np.argmax(scores))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="五、模糊综合评价法（FCE）"><a href="#五、模糊综合评价法（FCE）" class="headerlink" title="五、模糊综合评价法（FCE）"></a>五、模糊综合评价法（FCE）</h2><p>当我们评价一条河流的各项指标时，我们很容易得出各项指标的具体数值，类似的还有人的身高，体重。以上这些我们将其称为确定性概念。但是当我们被问到一个人的身高算高还是不高，一个老师好不好时，不同的人很有可能给出不同的答案（同样没有学习的学生一个被老师捞上来了他当然觉得这个老师好，至于挂科的就不好说了）这些往往称为模糊性概念，当涉及到这些问题时，就可能要用到模糊综合评价法。</p><h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>在详细介绍算法时，我们先引入经典集合，模糊集合与隶属函数这三个概念。</p><ol><li><p>经典集合<br>集合只具有相同属性的事物集体（就是你高中，高数和离散讲的那个集合）<br>比如：自然数集，实数集，性别种类 </p></li><li><p>模糊集合与隶属函数<br>模糊集合是用来描述模糊性概念的集合（年老，年轻，漂亮，丑陋） ，与经典集合相比模糊集合承认亦此彼此。一个人可能又丑又漂亮（卧槽这样讲好抽象）。<br><img src="https://bu.dusays.com/2026/03/24/69c1ffdf23fd3.png" alt="在这里插入图片描述">举个例子，一个模糊集合可能包含{漂亮，丑陋}两个概念，当是个人中有九个人觉得漂亮时，漂亮这一选项的可能性即为0.9，与此相对丑陋就是0.1。（对应模糊统计法）</p></li></ol><h3 id="使用步骤-3"><a href="#使用步骤-3" class="headerlink" title="&lt;1&gt; 使用步骤"></a>&lt;1&gt; 使用步骤</h3><h4 id="1-判断模糊集合分类"><a href="#1-判断模糊集合分类" class="headerlink" title="1. 判断模糊集合分类"></a>1. 判断模糊集合分类</h4><p><img src="https://bu.dusays.com/2026/03/24/69c1ffebce1eb.png" alt="在这里插入图片描述"></p><h4 id="2-隶属函数的选择"><a href="#2-隶属函数的选择" class="headerlink" title="2. 隶属函数的选择"></a>2. 隶属函数的选择</h4><p>隶属函数的确定方法分为三类，在这里只介绍最常用的指派法。（主观的确定方法，根据类型直接套用函数）<br><img src="https://bu.dusays.com/2026/03/24/69c1fff63425e.png" alt="在这里插入图片描述"></p><h4 id="3-引入计算集合"><a href="#3-引入计算集合" class="headerlink" title="3. 引入计算集合"></a>3. 引入计算集合</h4><p>在模糊综合评价的计算过程中，我们需要引入三个集合。分别为(因素集，评语集，指标集)<br><img src="https://bu.dusays.com/2026/03/24/69c20001e73c0.png" alt="在这里插入图片描述"></p><h4 id="4-模糊矩阵计算"><a href="#4-模糊矩阵计算" class="headerlink" title="4. 模糊矩阵计算"></a>4. 模糊矩阵计算<img src="https://bu.dusays.com/2026/03/24/69c2000b7076c.png" alt="在这里插入图片描述"></h4><p>在通过上文引出的概念确认模糊判断后，通过模糊判断矩阵与权重值矩阵相乘的操作即可得到最终的模糊集合。</p>]]></content>
       
       
       <categories>
           
-          <category> Blog </category>
+          <category> 数模竞赛 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 博客 </tag>
+            <tag> 数模 </tag>
             
-            <tag> 测试1 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>文章测试2</title>
-      <link href="/2026/03/20/Test2/h"/>
-      <url>/2026/03/20/Test2/h</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Blog </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客 </tag>
-            
-            <tag> 测试2 </tag>
+            <tag> 竞赛 </tag>
             
         </tags>
       
@@ -85,9 +58,9 @@
     
     
     <entry>
-      <title>Hexo搭建笔记（教程）</title>
-      <link href="/2026/03/20/hello-world/h"/>
-      <url>/2026/03/20/hello-world/h</url>
+      <title>文章测试2</title>
+      <link href="/2026/03/20/Test2/h"/>
+      <url>/2026/03/20/Test2/h</url>
       
         <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
       
@@ -103,6 +76,35 @@
             
             <tag> 博客 </tag>
             
+            <tag> 测试2 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo搭建笔记（一些心得）</title>
+      <link href="/2026/03/20/hello-world/h"/>
+      <url>/2026/03/20/hello-world/h</url>
+      
+        <content type="html"><![CDATA[<!-- Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).## Quick Start### Create a new post``` bash$ hexo new "My New Post"```More info: [Writing](https://hexo.io/docs/writing.html)### Run server``` bash$ hexo server```More info: [Server](https://hexo.io/docs/server.html)### Generate static files``` bash$ hexo generate```More info: [Generating](https://hexo.io/docs/generating.html)### Deploy to remote sites``` bash$ hexo deploy```More info: [Deployment](https://hexo.io/docs/one-command-deployment.html) --><h1 id="此文记录hexo安知鱼主题部署时的一些心得"><a href="#此文记录hexo安知鱼主题部署时的一些心得" class="headerlink" title="此文记录hexo安知鱼主题部署时的一些心得"></a>此文记录hexo安知鱼主题部署时的一些心得</h1><h2 id="一些小tips"><a href="#一些小tips" class="headerlink" title="一些小tips"></a>一些小tips</h2><ol><li>Hexo&#x2F;主题的加载顺序通常为：主题默认配置（themes&#x2F;anzhiyu&#x2F;_config.yml） → 根目录覆盖文件（_config.anzhiyu.yml） → 根目录 _config.yml（站点级配置），因此在官方文档中提出的生成复制文件是必要的，也方便下一步的修改 <strong>所有对主题的配置修改都应该在_config_anzhiyu.yml中进行</strong>。</li><li>修改网站各种资料，例如标题、副标题和邮箱等个人资料，请修改博客根目录的_config.yml (主题配置文件为theme&#x2F;anzhiyu&#x2F;_config.yml)，修改ip属地，需要修改anzhiyu目录下_config.yml的属性值</li><li>侧边栏闹钟已经失效，其开源档案停止更新，貌似已经停止服务，<code>clock: true</code>属性无实际用处。</li><li>尝试使用相对路径访问本地文件时会出现无法通过调用api的手段自动识别cover并切换文章主色调的情况，这是正常的情况，可以通过上传到图床解决！（并且有一件非常重要的事情，api是通过调用top_img参数实现的，一定要配置！）</li><li>nav_music配置中，server为对应的歌单&#x2F;歌手id所在的平台，如果是QQ音乐，则需要将默认值更改为tencent（其余平台同理）</li><li>若追番页面配置不成功，请参照官方开源文档手动在控制台运行（<code>hexo bangumi -u</code> ）</li><li>按照官方文档配置音乐馆时，我们会发现按照原文档（即使是原github项目）歌单信息依然无法刷新，经实验我们需要找到utils.js文件，并手动修改getCustomPlayList参数下的id与server。或者使用第二种方法将menu对应代码，做出以下更改。<br><code>menu:   我的:  音乐馆: /music/?id=1708664797&amp;server=tencent || icon-music</code></li><li>主题色配置在主题配置文件的theme_color: 改，其他颜色相关的都在你 博客目录&#x2F;themes&#x2F;anzhiyu&#x2F;source&#x2F;css&#x2F;_global&#x2F;index.styl 这个styl里更改，白天和夜间大部分都各有一个</li><li>主页轮播图有阴影不好看？做出以下修改即可：找到以下文件<br>myblogs\themes\anzhiyu\source\css_extra\home_top\top_group_banner.css<br>修改以下代码即可，box-shadow即是阴影。<br><code>.topGroup .todayCard::after {   position: absolute;      content: &quot;&quot;;   width: 100%;   height: 100%;   top: 0;   left: 0;   box-shadow: 0 -109px 133px -9px #000000 inset; } </code></li></ol><h2 id="以下为本人修改过的代码"><a href="#以下为本人修改过的代码" class="headerlink" title="以下为本人修改过的代码"></a>以下为本人修改过的代码</h2><h3 id="1-关于主题"><a href="#1-关于主题" class="headerlink" title="1. 关于主题"></a>1. 关于主题</h3><ol><li><p>在index.styl文件中包含着大量主题的配色，本人更加喜欢橙黄色于是有以下变动<br><code>--anzhiyu-theme-op-deep: #4259efdd;</code></p></li><li><p>在anzhiyu文件下的_config.yml文件中，可通过修改<br><code>rror_404:   enable: true   subtitle: &quot;这个废物还没有更新这样的文章呢 （我会努力更新哒！ /(ㄒoㄒ)/~~）&quot;   background: https://bu.dusays.com/2023/05/08/645907596997d.gif</code><br>进而修改404图片</p></li><li><p>myblogs\themes\anzhiyu\source\css_extra\console\console.css路径下box-shadow参数修改为#e6c083，这样及时更新轮播图图片也可以自己调整阴影效果。</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
+            
+            <tag> 前端 </tag>
+            
         </tags>
       
     </entry>
@@ -113,9 +115,9 @@
     
     
     <entry>
-      <title>about</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -135,28 +137,6 @@
     
     
     <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>dailyPhoto</title>
-      <link href="/dailyPhoto/index.html"/>
-      <url>/dailyPhoto/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title></title>
       <link href="/css/custom.css"/>
       <url>/css/custom.css</url>
@@ -168,9 +148,9 @@
     
     
     <entry>
-      <title>equipment</title>
-      <link href="/equipment/index.html"/>
-      <url>/equipment/index.html</url>
+      <title>about</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -190,11 +170,11 @@
     
     
     <entry>
-      <title>air-conditioner</title>
-      <link href="/air-conditioner/index.html"/>
-      <url>/air-conditioner/index.html</url>
+      <title>equipment</title>
+      <link href="/equipment/index.html"/>
+      <url>/equipment/index.html</url>
       
-        <content type="html"><![CDATA[<blockquote><p>终于为博客安装上了便携小空调</p></blockquote><style>.copyright-box a {  border-bottom: none !important;  padding: 0 !important;}</style><div id="air-conditioner-vue"></div><script defer data-pjax src='https://npm.elemecdn.com/anzhiyu-air-conditioner@1.0.1/index.3f125bc6.js'></script>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
@@ -206,6 +186,17 @@
       <url>/music/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>air-conditioner</title>
+      <link href="/air-conditioner/index.html"/>
+      <url>/air-conditioner/index.html</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>终于为博客安装上了便携小空调</p></blockquote><style>.copyright-box a {  border-bottom: none !important;  padding: 0 !important;}</style><div id="air-conditioner-vue"></div><script defer data-pjax src='https://npm.elemecdn.com/anzhiyu-air-conditioner@1.0.1/index.3f125bc6.js'></script>]]></content>
       
     </entry>
     
@@ -245,17 +236,6 @@
     
     
     <entry>
-      <title>wechat</title>
-      <link href="/wechat/index.html"/>
-      <url>/wechat/index.html</url>
-      
-        <content type="html"><![CDATA[<p>该博客网站截至目前由Morning一人所属运营.</p><p>由于本站长是笨蛋&#x2F;(ㄒoㄒ)&#x2F;~~,如果你能看到此消息证明本人还未解决文章页评论异常问题,可点击页面右下角(设置位置下面)与我私信聊天询问问题,看到后会立刻解答&#x3D;￣ω￣&#x3D;</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>tags</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
@@ -270,6 +250,28 @@
       <title>wordScenery</title>
       <link href="/wordScenery/index.html"/>
       <url>/wordScenery/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>wechat</title>
+      <link href="/wechat/index.html"/>
+      <url>/wechat/index.html</url>
+      
+        <content type="html"><![CDATA[<p>该博客网站截至目前由Morning一人所属运营.</p><p>由于本站长是笨蛋&#x2F;(ㄒoㄒ)&#x2F;~~,如果你能看到此消息证明本人还未解决文章页评论异常问题,可点击页面右下角(设置位置下面)与我私信聊天询问问题,看到后会立刻解答&#x3D;￣ω￣&#x3D;</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>dailyPhoto</title>
+      <link href="/dailyPhoto/index.html"/>
+      <url>/dailyPhoto/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
