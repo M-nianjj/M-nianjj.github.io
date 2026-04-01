@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>东南大学-ToolRosetta：打通开源工具与大模型智能体的最后一公里，让AI真正“会用工具</title>
+      <link href="/2026/04/01/ToolRosetta/h"/>
+      <url>/2026/04/01/ToolRosetta/h</url>
+      
+        <content type="html"><![CDATA[<p>在大语言模型（LLMs）飞速发展的今天，让模型“会说”已经不再稀奇，真正的挑战在于让它们<strong>会做</strong>。这正是工具调用（tool use）研究的核心：让AI不仅理解问题，还能调用外部工具完成真实任务。然而现实却远比理想复杂——海量开源工具分散在 GitHub 各个角落，接口混乱、依赖复杂、难以调用，即使是最先进的智能体系统，也往往只能依赖少量人工整理的工具库，难以真正扩展。</p><p>为了解决这一根本瓶颈，东南大学邸世民老师课题组提出了一项全新框架 ToolRosetta，并在相关研究中系统性地给出了答案。他们不仅重新定义了问题范式，还构建了一套从“代码仓库 → 标准化工具 → 自动调用”的完整自动化流水线，推动智能体从“会用少量工具”迈向“可调用整个开源世界”。</p><p>ToolRosetta 的核心思想，是将异构的开源代码仓库自动转化为符合 Model Context Protocol（MCP） 标准的可调用工具。系统能够根据用户任务，自主搜索 GitHub 中相关仓库，理解其功能结构，自动完成环境配置与接口封装，并最终生成可被 LLM 稳定调用的工具服务。更进一步，ToolRosetta 还能自动规划工具链，将多个工具组合起来，完成复杂的跨领域任务。<br><img src="https://bu.dusays.com/2026/04/01/69cc93f858251.png" alt="image"></p><ul><li>论文地址: <a href="https://arxiv.org/pdf/2603.09290">https://arxiv.org/pdf/2603.09290</a></li><li>主要机构：东南大学 邸世民老师实验室</li><li>代码仓库: 截至目前未开源</li></ul><h2 id="为什么需要ToolRosetta？"><a href="#为什么需要ToolRosetta？" class="headerlink" title="为什么需要ToolRosetta？"></a>为什么需要ToolRosetta？</h2><p>截至目前，复用和调用现有代码面临成本高且不可靠，代码仓库实际工具缺乏标准化与可执行接口的问题。MCP的出现相较于function calling虽然在很大程度上已经简化了工具的调用，但是依然在很大程度上依赖人工进行工具整理和标准化，限制了扩展性。可用工具虽然规模巨大，而人力资源有限导致人工API的整理调试“成本高，复现慢”。</p><p>文章提出的ToolRosetta，这是一个统一框架，可自动将开源代码仓库和 API 转换为与 MCP 兼容的工具，使其能够被 LLM 可靠调用。针对用户任务，ToolRosetta 能够自主规划工具链、识别相关代码库，并将其转换为可执行的 MCP 服务，从而以最少的人为干预实现端到端任务完成。</p><p>此外其引入的安全检测机制也在一定程度上应对了当今恶意api的问题，降低执行代码带来的风险。经过实验ToolRosetta能在多个领域自动标准化大量开源工具，并显著减少代码复现与部署所需的人力成本。</p><h2 id="方法讲解"><a href="#方法讲解" class="headerlink" title="方法讲解"></a>方法讲解</h2><h3 id="总体结构"><a href="#总体结构" class="headerlink" title="总体结构"></a>总体结构</h3><p>ToolRosetta总体结构可以分为三部分，分别为：</p><ol><li>上层：跨学科输入</li><li>中间：ToolRosetta 核心（自动工具化）</li><li>下层：跨学科输出（Output results）<br><img src="https://bu.dusays.com/2026/04/01/69ccc6d322c1d.png" alt="image"><br>现有方法面临工具碎片化的特点，同时还有三个核心痛点：</li></ol><ul><li>Heterogeneous（异构）</li><li>Hard to invoke（难调用）</li><li>Manual wrapping（需要人工封装）</li></ul><h3 id="MCP转换流水线"><a href="#MCP转换流水线" class="headerlink" title="MCP转换流水线"></a>MCP转换流水线</h3><p>流程如下：<br><code>User Query → GitHub API → Code Repository → LLM → MCP Tool</code><br>注意在ToolRosetta体系下有两个工具池，它不仅能用MCP工具，还能融合传统API。在自动寻找代码仓库的过程中，系统会经过查询优化、生成Topic、搜索Github、仓库评估、判断分支逻辑是否合理的步骤。（所以我之前想的添加一个可工具化判别器用来提升转化成功率其实已经实现了）其整体逻辑为，找工具，造工具和用工具。通过实验表明验结果表明，ToolRosetta 能够自动将 1580个开源工具转化为标准化且可执行的接口，覆盖生物科学、物理科学和健康科学等多个领域。<br><img src="https://bu.dusays.com/2026/04/01/69ccc9920f18b.png" alt="image"></p><h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>ToolRosetta 提出了一种开放工具池调用机制，可以自主地将任意 GitHub 仓库转换为标准化的 MCP 服务，该系统采用了分层的多智能体架构：</p><ul><li>规划智能体（Planning agent）：负责统筹整个转换流程；</li><li>工具搜索智能体（Tool-search agent）：利用 LLM 驱动的语义解析与功能匹配评估，检索并筛选候选仓库；</li><li>MCP 构建智能体（MCP-construction agent）：通过自动化流水线（包括仓库克隆、语义分析、环境配置和服务生成）将合格仓库转换为统一的 MCP 服务格式；</li><li>安全智能体（Security Agent）：检测生成服务中的潜在隐私泄露与安全风险；</li><li>评审智能体（Review agent）：在验证失败时进行根因分析并生成修复方案，通过迭代优化直到所有测试通过。</li></ul><h3 id="标准化效果"><a href="#标准化效果" class="headerlink" title="标准化效果"></a>标准化效果</h3><p>ToolRosetta基于 RosettaEval 基准中的 387 个任务作为检索来源，对 122 个 GitHub 仓库（涵盖 35 个子学科和 6 个科学领域）进行了仓库级转换评测。将 ToolRosetta 的初始转换结果（以下简称“首轮结果”，即在 Review-Revise-Fix 修复循环之前）与人工工程师以及 GPT-4o 的“仅服务生成”基线进行比较。在全部 122 个仓库的评测中，ToolRosetta 的首轮成功率为 53.0%，相比之下，GPT-4o 的仅服务生成基线为 49.6%，而人工工程师为 82.9%。尽管在不同领域的表现有些差异，但是几乎都比GPT-4o高或者持平。除了准确率外，相较于人工转换，其实现了 86.8% 的时间减少，约 7.6 倍加速。<br><img src="https://bu.dusays.com/2026/04/01/69cccdc339c5c.png" alt="image"></p><p>ToolRosetta 与四个基线系统（SciToolAgent、ChemCrow、RepoMaster、OpenAgents）在 6 个领域、35 个子学科上的任务完成准确率。带星号（*）的子领域表示 21 个分布外（OOD）子领域，这些子领域未被基线方法的人工整理工具集覆盖。可以看出ToolRosetta在大多数子领域上表现更好，在OOD 区域差距更大，体现了ToolRosetta的泛化能力。<br><img src="https://bu.dusays.com/2026/04/01/69ccce4ab853c.png" alt="image"></p><h3 id="案例研究"><a href="#案例研究" class="headerlink" title="案例研究"></a>案例研究</h3><p>为了在定量基准评测之外展示实际应用价值，并进一步验证 ToolRosetta 的有效性，文章展示了三个真实的科学研究任务案例以及一个安全检测案例：（1）中风分析；（2）基于基因序列的物种预测；（3）钙钛矿材料发现。</p><p><img src="https://bu.dusays.com/2026/04/01/69cccf2504df4.png" alt="image"></p><h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2><p>ToolRosetta 可以根据需求从开源代码仓库中动态生成适用于特定领域的工具，实现首轮转换成功率 53.0%，在迭代修复后提升至 68.4%，同时将每个仓库的标准化时间从约 26.5 分钟缩短至 3.5 分钟。其在六大科学类别上实现了 55.6% 的宏平均任务完成准确率，其中在地球与环境科学（62.2%）和科学共同体与社会（60.4%）等领域表现尤为突出。将 ToolRosetta 转换得到的工具集成到基线系统中，可带来平均 12.0 个百分点的性能提升，这表明标准化工具服务可以作为一种可迁移的基础设施，用于增强现有智能体框架。</p><p>其面临的问题在于自动转化的成功率与人工专家相比依旧存在差距。<strong>环境重建</strong>与<strong>代码结构异构型</strong>是无法完全通过迭代自修复解决的问题的关键阻碍（有没有仔细看失败案例，是否能通过变化理解策略的方式提高性能）。我也在思考针对GUI仓库分离 UI 层和 computation 层，找 callback 背后的核心函数；针对notebook分离出来cell然后提取出来可用函数。会不会是一种解决代码结构异构性的思路。在环境重建方面，调整模型的插入策略能否改善环境的复杂问题？</p><h2 id="开放生态系统中的安全悖论"><a href="#开放生态系统中的安全悖论" class="headerlink" title="开放生态系统中的安全悖论"></a>开放生态系统中的安全悖论</h2><h3 id="来自外部恶意攻击的自动化治理"><a href="#来自外部恶意攻击的自动化治理" class="headerlink" title="来自外部恶意攻击的自动化治理"></a>来自外部恶意攻击的自动化治理</h3><p>当前的科学智能体系统从根本上受到人工工具整理瓶颈的限制。平台能力取决于专家维护工具库的速度。ToolRosetta 通过自动化标准化突破了这一限制，使智能体能够利用开源生态中的长尾工具来处理分布外任务。为应对科学计算的特殊约束，作者将防御机制嵌入 MCP 生成流程之中，构建了一个基于 CIA 三元组（机密性、完整性、可用性）的自动化治理框架<br><img src="https://bu.dusays.com/2026/04/01/69cce8f069613.png" alt="image"></p><p><strong>机密性（Confidentiality）：架构隔离</strong><br>生物医学研究要求严格的数据主权保护，尤其是在处理中风分析中的患者数据等敏感信息时。由于传统代码审查无法跟上智能体生成的速度，作者构建阶段强制执行的路径白名单和沙箱机制，取代基于信任的访问控制。这种物理隔离确保即使出现错误请求，也会在合规边界被拦截，从设计上保证数据安全。</p><p><strong>完整性（Integrity）：逻辑解耦</strong><br>科学工作流通常依赖脆弱的遗留代码和 shell 脚本，容易受到命令注入导致的远程代码执行攻击。与其逐一修补底层漏洞，ToolRosetta 通过强制参数化执行重构调用逻辑。在接口层严格分离“数据”和“指令”，在不受信任输入与核心系统之间建立隔离屏障，从而有效防止恶意代码执行。</p><p><strong>可用性（Availability）：计算熔断机制</strong><br>与普通 Web 服务不同，科学计算对资源消耗高度敏感。恶意的算法复杂度攻击可能瞬间耗尽 HPC 资源或产生巨额成本，即所谓的“金融拒绝服务攻击”。ToolRosetta 通过预先进行计算复杂度评估并设置资源配额，将治理前移至任务提交阶段。这种计算熔断机制确保共享基础设施在异常负载下仍能稳定运行，从而保障科学服务的持续可用性。</p><h3 id="来自内部随机扰动的自动化治理"><a href="#来自内部随机扰动的自动化治理" class="headerlink" title="来自内部随机扰动的自动化治理"></a>来自内部随机扰动的自动化治理</h3><p>开放工具生态面临严峻的“智能体内生风险”：即便工具可信，LLM 也可能因推理误差或提示扰动偏离意图。当此类偏差结合高权限操作（如删除、支付）时，微小的推理错误即可引发不可逆后果。核心挑战在于高影响操作与普通操作界限模糊但后果悬殊，因此安全机制必须超越单纯的“能力授权”，转向基于上下文的“执行适宜性”判断，严格约束有授权的越界行为。</p><p>ToolRosetta 通过风险感知的执行治理来应对这一问题。系统根据操作后果对行为进行分级：</p><ul><li>检索与分析：低风险</li><li>可逆修改：中风险</li><li>不可逆或外部提交操作：高风险</li></ul><p>这样的机制能将系统“二元权限控制”转变为“有边界的自主性”，使智能体保持实用性的同时，将高影响错误限制在发生之前。</p><h2 id="进一步的扩展"><a href="#进一步的扩展" class="headerlink" title="进一步的扩展"></a>进一步的扩展</h2><p>当前 ToolRosetta 的实现主要聚焦于 Python 仓库（现实中Python为科学计算中的主导语言其依赖声明相对标准化，函数接口较为清晰，并且其软件生态更适合自动化的环境重建、工具封装和验证）。</p><p>从架构层面来看ToolRosetta 的核心流程不依赖于单一编程语言。其有潜力也完全可以在结构上扩展到多语言生态。Python语言知识只是当前的起点，但绝对不是ToolRosetta 的边界。无论从架构设计还是初步实现来看，“仓库到 MCP”的转换能力都有望持续扩展到更多编程语言。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 科研学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 智能体 </tag>
+            
+            <tag> MCP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数模竞赛算法讲解（评价类算法）</title>
       <link href="/2026/03/24/%E6%95%B0%E6%A8%A1/h"/>
       <url>/2026/03/24/%E6%95%B0%E6%A8%A1/h</url>
@@ -31,33 +58,6 @@
     
     
     <entry>
-      <title>文章测试2</title>
-      <link href="/2026/03/20/Test2/h"/>
-      <url>/2026/03/20/Test2/h</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Blog </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客 </tag>
-            
-            <tag> 测试2 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>文章测试3</title>
       <link href="/2026/03/20/Test3/h"/>
       <url>/2026/03/20/Test3/h</url>
@@ -77,6 +77,33 @@
             <tag> 博客 </tag>
             
             <tag> 测试3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>文章测试2</title>
+      <link href="/2026/03/20/Test2/h"/>
+      <url>/2026/03/20/Test2/h</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Blog </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客 </tag>
+            
+            <tag> 测试2 </tag>
             
         </tags>
       
@@ -115,17 +142,6 @@
     
     
     <entry>
-      <title>air-conditioner</title>
-      <link href="/air-conditioner/index.html"/>
-      <url>/air-conditioner/index.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>终于为博客安装上了便携小空调</p></blockquote><style>.copyright-box a {  border-bottom: none !important;  padding: 0 !important;}</style><div id="air-conditioner-vue"></div><script defer data-pjax src='https://npm.elemecdn.com/anzhiyu-air-conditioner@1.0.1/index.3f125bc6.js'></script>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>album</title>
       <link href="/album/index.html"/>
       <url>/album/index.html</url>
@@ -137,9 +153,9 @@
     
     
     <entry>
-      <title>about</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
+      <title>essay</title>
+      <link href="/essay/index.html"/>
+      <url>/essay/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -159,6 +175,28 @@
     
     
     <entry>
+      <title>air-conditioner</title>
+      <link href="/air-conditioner/index.html"/>
+      <url>/air-conditioner/index.html</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>终于为博客安装上了便携小空调</p></blockquote><style>.copyright-box a {  border-bottom: none !important;  padding: 0 !important;}</style><div id="air-conditioner-vue"></div><script defer data-pjax src='https://npm.elemecdn.com/anzhiyu-air-conditioner@1.0.1/index.3f125bc6.js'></script>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>fcircle</title>
+      <link href="/fcircle/index.html"/>
+      <url>/fcircle/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>equipment</title>
       <link href="/equipment/index.html"/>
       <url>/equipment/index.html</url>
@@ -170,20 +208,9 @@
     
     
     <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>essay</title>
-      <link href="/essay/index.html"/>
-      <url>/essay/index.html</url>
+      <title>music</title>
+      <link href="/music/index.html"/>
+      <url>/music/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -214,9 +241,31 @@
     
     
     <entry>
-      <title>music</title>
-      <link href="/music/index.html"/>
-      <url>/music/index.html</url>
+      <title>about</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>tags</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -236,17 +285,6 @@
     
     
     <entry>
-      <title>link</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>wordScenery</title>
       <link href="/wordScenery/index.html"/>
       <url>/wordScenery/index.html</url>
@@ -258,20 +296,9 @@
     
     
     <entry>
-      <title>fcircle</title>
-      <link href="/fcircle/index.html"/>
-      <url>/fcircle/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>tags</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>link</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
