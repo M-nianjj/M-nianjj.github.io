@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>东南大学-从“不会接”到“自动补”：Sci-VLA 如何解决机器人长任务执行难题</title>
+      <link href="/2026/04/07/Sci-VLA/h"/>
+      <url>/2026/04/07/Sci-VLA/h</url>
+      
+        <content type="html"><![CDATA[<p>在具身智能与科学自动化快速发展的背景下，让机器人“会动”早已不是难题，真正的挑战在于让它们连续地做对一整套复杂操作。这正是长时序任务（long-horizon tasks）的核心难点：机器人不仅要完成单个动作，还必须在多个原子任务之间实现稳定衔接。然而现实情况却远不理想——现有视觉-语言-动作（VLA）模型虽然能够准确执行训练中见过的单个任务，却常常在任务切换时“卡住”，出现状态断层（state gap），导致整条任务链执行失败。</p><p>为了解决这一关键瓶颈，东南大学团队提出了一种全新的推理框架 Sci-VLA（Agentic VLA Inference Plugin）。他们并没有选择继续堆叠数据或重新训练模型，而是重新思考问题本质：与其让模型学会所有可能的任务组合，不如让系统在执行过程中动态补全缺失的过渡步骤。基于这一思路，作者设计了一种无需额外训练的推理插件，使VLA模型能够从“只会执行单个任务”，迈向“能够完成连续复杂实验流程”。</p><p>Sci-VLA 的核心思想，是引入一个基于大语言模型（LLM）的智能体，在任务执行过程中实时介入。当系统检测到原子任务之间存在状态断层时，该智能体会结合当前环境状态、视觉信息以及目标任务描述，自动生成可执行的“过渡动作代码”，并插入到原有动作序列中，从而实现任务链的无缝衔接。通过这种方式，Sci-VLA将机器人控制从“静态轨迹执行”提升为“动态推理驱动”，为开放式、长时序的科学实验自动化提供了一种更具扩展性的解决方案。<br><img src="https://bu.dusays.com/2026/04/03/69cfa7d4df1ef.png" alt="image"></p><ul><li>论文地址: <a href="https://arxiv.org/pdf/2602.09430">https://arxiv.org/pdf/2602.09430</a></li><li>主要机构：东南大学 邸世民老师实验室</li><li>代码仓库: 截至目前未开源</li></ul><h2 id="为什么需要Sci-VLA？"><a href="#为什么需要Sci-VLA？" class="headerlink" title="为什么需要Sci-VLA？"></a>为什么需要Sci-VLA？</h2><p>截至目前，机器人在复杂实验任务中的表现仍然存在一个关键瓶颈：能做单步，但做不好连续流程。现有的视觉-语言-动作（VLA）模型在原子任务（如抓取、放置、开关设备）上已经表现稳定，但一旦面对由多个步骤组成的长时序任务，往往会在任务切换处失败。其根本原因在于训练数据通常以独立原子任务为主，缺乏任务之间的过渡信息，导致模型在推理阶段进入“分布外状态”（out-of-distribution），无法完成必要的中间操作。</p><p>尽管已有方法尝试通过<strong>增加数据或引入任务分解</strong>来缓解这一问题，但这些方法往往依赖大量训练成本，且难以覆盖所有可能的任务组合。在真实实验环境中，任务变化频繁、组合多样，仅依赖训练难以实现良好的扩展性。因此，如何在不重新训练模型的前提下，让机器人具备跨任务衔接能力，成为一个关键挑战。</p><p>为此文章提出 Sci-VLA，这是一种面向长时序科学实验任务的推理增强框架。它通过在推理阶段引入一个基于大语言模型（LLM）的智能体插件，在检测到任务之间的“状态断层”时，<strong>自动生成并插入过渡动作</strong>，从而弥合原子任务之间的连接问题。针对用户给定的任务序列，Sci-VLA能够动态分析当前状态与目标状态之间的差距，并生成可执行的机器人控制代码，实现任务链的连续执行。</p><p>此外，Sci-VLA在设计中引入了安全约束与代码模板机制（提供模板，计算距离），在一定程度上降低了由LLM生成动作带来的不确定性与潜在风险。实验表明，该方法能够在多个长时序任务中显著提升后续任务的成功率，并增强整体执行的连贯性，同时避免了额外训练带来的高成本问题。<br><img src="https://bu.dusays.com/2026/04/03/69cfa8a9ce31e.png" alt="image"></p><h2 id="方法讲解"><a href="#方法讲解" class="headerlink" title="方法讲解"></a>方法讲解</h2><h3 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h3><p>近年来，机器人实验室正逐步从传统自动化迈向自主科学发现。通过机械臂与自动化系统，研究者已经能够实现从材料合成到参数搜索的一系列高通量实验。例如，自动化实验室能够大规模探索材料组合空间，甚至在复杂化学反应中发现性能显著提升的催化路径。这一趋势表明，机器人正从“执行工具”逐渐演变为“科研主体”。</p><p>在机器人操作层面，主流方法主要分为两类：</p><ol><li>强化学习（RL）：通过与环境交互学习策略，在特定任务中表现出色，但在真实开放环境中仍面临安全性与泛化能力不足的问题。</li><li>视觉-语言-动作模型（VLA）：相比之下，VLA模型通过融合视觉与语言信息，能够理解自然语言指令并生成动作，在开放场景中展现出更强的适应能力，成为近年来的研究热点。</li></ol><p>然而，无论是RL还是VLA，在面对<strong>长时序任务</strong>时都存在明显瓶颈。这类任务通常由多个原子操作串联而成，例如<br><code>“打开设备 → 放入样本 → 启动运行”。</code><br>现有方法往往通过任务分解来处理，即先拆分为独立子任务再逐一执行。但这种策略忽略了任务之间的状态依赖关系，容易导致误差累积，即所谓的**“技能链问题”**（skill chaining）。</p><p>为缓解这一问题，部分VLA工作尝试在训练阶段引入任务分解信息或优化数据结构，以提升长时序泛化能力。然而，这类方法通常依赖额外训练和数据设计，难以应对开放环境中不断变化的任务组合。</p><h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><p>Sci-VLA的整体流程如下：</p><ol><li>连接问题，VLA执行初次任务</li><li>VLA断开，插件介入，生成过渡动作，状态对齐</li><li>VLA模型重新介入，执行下一步<br><img src="https://bu.dusays.com/2026/04/03/69cfa9cfd61d0.png" alt="image"></li></ol><p>在 Sci-VLA 的推理过程中，当接收到下一个原子任务i+1 的指令后，生成模块会生成对应的过渡动作代码。随后，当当前原子任务i 执行完成时，插入模块会中断 VLA 的推理过程。此时，过渡动作将被生成并插入到动作序列中。最后，VLA 恢复推理，继续执行后续任务。这两个模块以迭代方式运行，循环执行，直到整个长时序任务完成。</p><p>由于大语言模型可能产生<strong>幻觉（hallucination）</strong>，为了生成可执行的目标代码，作者采取了以下措施：</p><ul><li>在 prompt 中提供固定输出模板（见图12）</li><li>在 execute 函数中标注需要修改的部分</li><li>提供可调用接口，例如：<br>– 沿某轴移动<br>– 关节恢复（joint recovery）</li></ul><p>同时项目也考虑了科学实验的问题因此：在 prompt 和代码模板中加入约束，并且在代码逻辑中添加规定步骤如下：</p><ol><li>安全检查：是否需要释放夹爪，周围是否有障碍物</li><li>避障：将夹爪移动到安全位置</li><li>状态恢复：使用目标关节位置恢复机器人状态</li><li>继续执行：状态对齐后恢复VLA推理</li></ol><h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>项目使用一个模拟的科学实验室系统来验证所提出的方法。该仿真环境可以：</p><ul><li>提高数据采集效率</li><li>避免对真实仪器造成损坏<br>本文采用：</li><li>Autobio [25] 实验室环境</li><li>基于 MuJoCo 引擎<br><img src="https://bu.dusays.com/2026/04/07/69d4a86081ed4.png" alt="image"></li></ul><h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><h3 id="基础验证"><a href="#基础验证" class="headerlink" title="基础验证"></a>基础验证</h3><p>课题组选择了两个基于扩散模型的VLA（π₀ 和 π₀.5），以及一个基于自回归的VLA作为基础模型。在“cleaning table”任务中，我们为每个原子任务生成了100条示范数据，并对这三个基础模型分别进行了80,000步的微调。随后，我们将每个原子任务的最大推理时间设为3秒。如果超过时间限制，则自动终止当前推理，并立即进入下一个原子任务。<br><img src="https://bu.dusays.com/2026/04/07/69d4ab4b7d413.png" alt="image"><br>如上表所示，基础VLA模型仅在第一个原子任务上表现良好。由于我们的原子任务训练数据是分别采集的，因此任务之间很容易缺乏过渡。机器人在完成第一个任务后会进入分布外状态（out-of-distribution state）。这表明VLA只是“记住了轨迹”，而没有真正理解任务。<br>此外可以观察到，Sci-VLA在原子任务2和任务3上的成功率仍然较低，这主要是由于基础VLA模型本身性能差异所导致的。可以看出，π₀ 和 π₀.5 的泛化能力优于 fast；相比 π₀，π₀.5 更适合处理更复杂的原子任务。</p><h3 id="原子任务连贯性"><a href="#原子任务连贯性" class="headerlink" title="原子任务连贯性"></a>原子任务连贯性</h3><p>在“cleaning table”任务中，Sci-VLA实现了更高的任务连贯性。基础模型 π₀在开始第二个原子任务时会出现混乱，表现为持续抖动，并且这种抖动会持续到推理时间耗尽为止。相比之下，Sci-π₀ 在所有原子任务中都能保持完整的执行轨迹。即使某一个原子任务失败，Sci-π₀ 的过渡动作仍能确保后续任务继续执行。<br><img src="https://bu.dusays.com/2026/04/07/69d4ada5165c0.png" alt="image"></p><h3 id="长时序实验操作任务"><a href="#长时序实验操作任务" class="headerlink" title="长时序实验操作任务"></a>长时序实验操作任务</h3><p>在科学实验操作任务中，作者为每个原子任务收集了100条示范数据（共14种不同原子任务）。我们将这些数据混合，设置batch size为32，并在4张NVIDIA H100 GPU上对π₀进行100,000步微调。随后，使用该微调模型在具有随机初始扰动的机械臂上执行任务。如下图所示无论任务序列长度如何，Sci-VLA在科学实验场景中仍然能够取得更高的成功率。<br><img src="https://bu.dusays.com/2026/04/07/69d4b046a1336.png" alt="image"></p><p>与此同时，文章也验证了所提出的方法不仅适用于仿真环境，也同样能够在真实实验室环境中有效运行。作者基于下图中的任务C构建了一个真实世界的任务场景：操作热循环仪（thermal cycler）。该复合任务由两个原子任务组成：</p><ul><li>C.1：打开热循环仪的盖子</li><li>C.2：将PCR板放入仪器内部<br><img src="https://bu.dusays.com/2026/04/07/69d4b32740d35.png" alt="image"></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 科研学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 具身智能 </tag>
+            
+            <tag> VLA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>东南大学-ToolRosetta：打通开源工具与大模型智能体的最后一公里，让AI真正“会用工具</title>
       <link href="/2026/04/01/ToolRosetta/h"/>
       <url>/2026/04/01/ToolRosetta/h</url>
@@ -142,9 +169,20 @@
     
     
     <entry>
-      <title>album</title>
-      <link href="/album/index.html"/>
-      <url>/album/index.html</url>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>dailyPhoto</title>
+      <link href="/dailyPhoto/index.html"/>
+      <url>/dailyPhoto/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -164,22 +202,44 @@
     
     
     <entry>
-      <title></title>
-      <link href="/css/custom.css"/>
-      <url>/css/custom.css</url>
+      <title>album</title>
+      <link href="/album/index.html"/>
+      <url>/album/index.html</url>
       
-        <content type="html"><![CDATA[#web_bg {    background-size: 20rem;    background-image: url(https://blog.xiowo.net//img/bg.svg) !important;    background-repeat: initial}/* 夜间网站背景 */[data-theme=dark] #web_bg {    background-size: 100rem;    background-image: url(https://blog.xiowo.net//img/bg-dark.jpg) !important;}]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>air-conditioner</title>
-      <link href="/air-conditioner/index.html"/>
-      <url>/air-conditioner/index.html</url>
+      <title>link</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
-        <content type="html"><![CDATA[<blockquote><p>终于为博客安装上了便携小空调</p></blockquote><style>.copyright-box a {  border-bottom: none !important;  padding: 0 !important;}</style><div id="air-conditioner-vue"></div><script defer data-pjax src='https://npm.elemecdn.com/anzhiyu-air-conditioner@1.0.1/index.3f125bc6.js'></script>]]></content>
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>about</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/css/custom.css"/>
+      <url>/css/custom.css</url>
+      
+        <content type="html"><![CDATA[#web_bg {    background-size: 20rem;    background-image: url(https://blog.xiowo.net//img/bg.svg) !important;    background-repeat: initial}/* 夜间网站背景 */[data-theme=dark] #web_bg {    background-size: 100rem;    background-image: url(https://blog.xiowo.net//img/bg-dark.jpg) !important;}]]></content>
       
     </entry>
     
@@ -219,55 +279,11 @@
     
     
     <entry>
-      <title>dailyPhoto</title>
-      <link href="/dailyPhoto/index.html"/>
-      <url>/dailyPhoto/index.html</url>
+      <title>air-conditioner</title>
+      <link href="/air-conditioner/index.html"/>
+      <url>/air-conditioner/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>隐私政策</title>
-      <link href="/privacy/index.html"/>
-      <url>/privacy/index.html</url>
-      
-        <content type="html"><![CDATA[<p>这是我的隐私协议页面。</p><p>本网站不会收集敏感信息,仅用于学习记录,如需引用转发标注博客主页链接以及Morning即可(●’◡’●)。</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>about</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>tags</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<blockquote><p>终于为博客安装上了便携小空调</p></blockquote><style>.copyright-box a {  border-bottom: none !important;  padding: 0 !important;}</style><div id="air-conditioner-vue"></div><script defer data-pjax src='https://npm.elemecdn.com/anzhiyu-air-conditioner@1.0.1/index.3f125bc6.js'></script>]]></content>
       
     </entry>
     
@@ -285,6 +301,17 @@
     
     
     <entry>
+      <title>tags</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>wordScenery</title>
       <link href="/wordScenery/index.html"/>
       <url>/wordScenery/index.html</url>
@@ -296,11 +323,11 @@
     
     
     <entry>
-      <title>link</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>隐私政策</title>
+      <link href="/privacy/index.html"/>
+      <url>/privacy/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>这是我的隐私协议页面。</p><p>本网站不会收集敏感信息,仅用于学习记录,如需引用转发标注博客主页链接以及Morning即可(●’◡’●)。</p>]]></content>
       
     </entry>
     
