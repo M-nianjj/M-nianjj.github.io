@@ -169,9 +169,53 @@
     
     
     <entry>
+      <title>air-conditioner</title>
+      <link href="/air-conditioner/index.html"/>
+      <url>/air-conditioner/index.html</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>终于为博客安装上了便携小空调</p></blockquote><style>.copyright-box a {  border-bottom: none !important;  padding: 0 !important;}</style><div id="air-conditioner-vue"></div><script defer data-pjax src='https://npm.elemecdn.com/anzhiyu-air-conditioner@1.0.1/index.3f125bc6.js'></script>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>categories</title>
       <link href="/categories/index.html"/>
       <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>album</title>
+      <link href="/album/index.html"/>
+      <url>/album/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/css/custom.css"/>
+      <url>/css/custom.css</url>
+      
+        <content type="html"><![CDATA[#web_bg {    background-size: 20rem;    background-image: url(https://blog.xiowo.net//img/bg.svg) !important;    background-repeat: initial}/* 夜间网站背景 */[data-theme=dark] #web_bg {    background-size: 100rem;    background-image: url(https://blog.xiowo.net//img/bg-dark.jpg) !important;}]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>about</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -202,99 +246,11 @@
     
     
     <entry>
-      <title>album</title>
-      <link href="/album/index.html"/>
-      <url>/album/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>link</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>about</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/css/custom.css"/>
-      <url>/css/custom.css</url>
-      
-        <content type="html"><![CDATA[#web_bg {    background-size: 20rem;    background-image: url(https://blog.xiowo.net//img/bg.svg) !important;    background-repeat: initial}/* 夜间网站背景 */[data-theme=dark] #web_bg {    background-size: 100rem;    background-image: url(https://blog.xiowo.net//img/bg-dark.jpg) !important;}]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>fcircle</title>
       <link href="/fcircle/index.html"/>
       <url>/fcircle/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>equipment</title>
-      <link href="/equipment/index.html"/>
-      <url>/equipment/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>music</title>
-      <link href="/music/index.html"/>
-      <url>/music/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>air-conditioner</title>
-      <link href="/air-conditioner/index.html"/>
-      <url>/air-conditioner/index.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>终于为博客安装上了便携小空调</p></blockquote><style>.copyright-box a {  border-bottom: none !important;  padding: 0 !important;}</style><div id="air-conditioner-vue"></div><script defer data-pjax src='https://npm.elemecdn.com/anzhiyu-air-conditioner@1.0.1/index.3f125bc6.js'></script>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>wechat</title>
-      <link href="/wechat/index.html"/>
-      <url>/wechat/index.html</url>
-      
-        <content type="html"><![CDATA[<p>该博客网站截至目前由Morning一人所属运营.</p><p>由于本站长是笨蛋&#x2F;(ㄒoㄒ)&#x2F;~~,如果你能看到此消息证明本人还未解决文章页评论异常问题,可点击页面右下角(设置位置下面)与我私信聊天询问问题,看到后会立刻解答&#x3D;￣ω￣&#x3D;</p>]]></content>
       
     </entry>
     
@@ -323,11 +279,55 @@
     
     
     <entry>
+      <title>wechat</title>
+      <link href="/wechat/index.html"/>
+      <url>/wechat/index.html</url>
+      
+        <content type="html"><![CDATA[<p>该博客网站截至目前由Morning一人所属运营.</p><p>由于本站长是笨蛋&#x2F;(ㄒoㄒ)&#x2F;~~,如果你能看到此消息证明本人还未解决文章页评论异常问题,可点击页面右下角(设置位置下面)与我私信聊天询问问题,看到后会立刻解答&#x3D;￣ω￣&#x3D;</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>隐私政策</title>
       <link href="/privacy/index.html"/>
       <url>/privacy/index.html</url>
       
         <content type="html"><![CDATA[<p>这是我的隐私协议页面。</p><p>本网站不会收集敏感信息,仅用于学习记录,如需引用转发标注博客主页链接以及Morning即可(●’◡’●)。</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>link</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>music</title>
+      <link href="/music/index.html"/>
+      <url>/music/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>equipment</title>
+      <link href="/equipment/index.html"/>
+      <url>/equipment/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
