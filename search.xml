@@ -112,33 +112,6 @@
     
     
     <entry>
-      <title>Hexo搭建笔记（一些心得）</title>
-      <link href="/2026/03/20/hello-world/h"/>
-      <url>/2026/03/20/hello-world/h</url>
-      
-        <content type="html"><![CDATA[<!-- Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).## Quick Start### Create a new post``` bash$ hexo new "My New Post"```More info: [Writing](https://hexo.io/docs/writing.html)### Run server``` bash$ hexo server```More info: [Server](https://hexo.io/docs/server.html)### Generate static files``` bash$ hexo generate```More info: [Generating](https://hexo.io/docs/generating.html)### Deploy to remote sites``` bash$ hexo deploy```More info: [Deployment](https://hexo.io/docs/one-command-deployment.html) --><h1 id="此文记录hexo安知鱼主题部署时的一些心得"><a href="#此文记录hexo安知鱼主题部署时的一些心得" class="headerlink" title="此文记录hexo安知鱼主题部署时的一些心得"></a>此文记录hexo安知鱼主题部署时的一些心得</h1><h2 id="一些小tips"><a href="#一些小tips" class="headerlink" title="一些小tips"></a>一些小tips</h2><ol><li>Hexo&#x2F;主题的加载顺序通常为：主题默认配置（themes&#x2F;anzhiyu&#x2F;_config.yml） → 根目录覆盖文件（_config.anzhiyu.yml） → 根目录 _config.yml（站点级配置），因此在官方文档中提出的生成复制文件是必要的，也方便下一步的修改 <strong>所有对主题的配置修改都应该在_config_anzhiyu.yml中进行</strong>。</li><li>修改网站各种资料，例如标题、副标题和邮箱等个人资料，请修改博客根目录的_config.yml (主题配置文件为theme&#x2F;anzhiyu&#x2F;_config.yml)，修改ip属地，需要修改anzhiyu目录下_config.yml的属性值</li><li>侧边栏闹钟已经失效，其开源档案停止更新，貌似已经停止服务，<code>clock: true</code>属性无实际用处。</li><li>尝试使用相对路径访问本地文件时会出现无法通过调用api的手段自动识别cover并切换文章主色调的情况，这是正常的情况，可以通过上传到图床解决！（并且有一件非常重要的事情，api是通过调用top_img参数实现的，一定要配置！）</li><li>nav_music配置中，server为对应的歌单&#x2F;歌手id所在的平台，如果是QQ音乐，则需要将默认值更改为tencent（其余平台同理）</li><li>若追番页面配置不成功，请参照官方开源文档手动在控制台运行（<code>hexo bangumi -u</code> ）</li><li>按照官方文档配置音乐馆时，我们会发现按照原文档（即使是原github项目）歌单信息依然无法刷新，经实验我们需要找到utils.js文件，并手动修改getCustomPlayList参数下的id与server。或者使用第二种方法将menu对应代码，做出以下更改。<br><code>menu:   我的:  音乐馆: /music/?id=1708664797&amp;server=tencent || icon-music</code></li><li>主题色配置在主题配置文件的theme_color: 改，其他颜色相关的都在你 博客目录&#x2F;themes&#x2F;anzhiyu&#x2F;source&#x2F;css&#x2F;_global&#x2F;index.styl 这个styl里更改，白天和夜间大部分都各有一个</li><li>主页轮播图有阴影不好看？做出以下修改即可：找到以下文件<br>myblogs\themes\anzhiyu\source\css_extra\home_top\top_group_banner.css<br>修改以下代码即可，box-shadow即是阴影。<br><code>.topGroup .todayCard::after {   position: absolute;      content: &quot;&quot;;   width: 100%;   height: 100%;   top: 0;   left: 0;   box-shadow: 0 -109px 133px -9px #000000 inset; } </code></li></ol><h2 id="以下为本人修改过的代码"><a href="#以下为本人修改过的代码" class="headerlink" title="以下为本人修改过的代码"></a>以下为本人修改过的代码</h2><h3 id="1-关于主题"><a href="#1-关于主题" class="headerlink" title="1. 关于主题"></a>1. 关于主题</h3><ol><li><p>在index.styl文件中包含着大量主题的配色，本人更加喜欢橙黄色于是有以下变动<br><code>--anzhiyu-theme-op-deep: #4259efdd;</code></p></li><li><p>在anzhiyu文件下的_config.yml文件中，可通过修改<br><code>rror_404:   enable: true   subtitle: &quot;这个废物还没有更新这样的文章呢 （我会努力更新哒！ /(ㄒoㄒ)/~~）&quot;   background: https://bu.dusays.com/2023/05/08/645907596997d.gif</code><br>进而修改404图片</p></li><li><p>myblogs\themes\anzhiyu\source\css_extra\console\console.css路径下box-shadow参数修改为#e6c083，这样及时更新轮播图图片也可以自己调整阴影效果。</p></li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端开发 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
-            
-            <tag> 前端 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>文章测试3</title>
       <link href="/2026/03/20/Test3/h"/>
       <url>/2026/03/20/Test3/h</url>
@@ -164,19 +137,35 @@
     </entry>
     
     
-  
-  
-    
     
     <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title>Hexo搭建笔记（一些心得）</title>
+      <link href="/2026/03/20/hello-world/h"/>
+      <url>/2026/03/20/hello-world/h</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<!-- Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).## Quick Start### Create a new post``` bash$ hexo new "My New Post"```More info: [Writing](https://hexo.io/docs/writing.html)### Run server``` bash$ hexo server```More info: [Server](https://hexo.io/docs/server.html)### Generate static files``` bash$ hexo generate```More info: [Generating](https://hexo.io/docs/generating.html)### Deploy to remote sites``` bash$ hexo deploy```More info: [Deployment](https://hexo.io/docs/one-command-deployment.html) --><h1 id="此文记录hexo安知鱼主题部署时的一些心得"><a href="#此文记录hexo安知鱼主题部署时的一些心得" class="headerlink" title="此文记录hexo安知鱼主题部署时的一些心得"></a>此文记录hexo安知鱼主题部署时的一些心得</h1><h2 id="一些小tips"><a href="#一些小tips" class="headerlink" title="一些小tips"></a>一些小tips</h2><ol><li>Hexo&#x2F;主题的加载顺序通常为：主题默认配置（themes&#x2F;anzhiyu&#x2F;_config.yml） → 根目录覆盖文件（_config.anzhiyu.yml） → 根目录 _config.yml（站点级配置），因此在官方文档中提出的生成复制文件是必要的，也方便下一步的修改 <strong>所有对主题的配置修改都应该在_config_anzhiyu.yml中进行</strong>。</li><li>修改网站各种资料，例如标题、副标题和邮箱等个人资料，请修改博客根目录的_config.yml (主题配置文件为theme&#x2F;anzhiyu&#x2F;_config.yml)，修改ip属地，需要修改anzhiyu目录下_config.yml的属性值</li><li>侧边栏闹钟已经失效，其开源档案停止更新，貌似已经停止服务，<code>clock: true</code>属性无实际用处。</li><li>尝试使用相对路径访问本地文件时会出现无法通过调用api的手段自动识别cover并切换文章主色调的情况，这是正常的情况，可以通过上传到图床解决！（并且有一件非常重要的事情，api是通过调用top_img参数实现的，一定要配置！）</li><li>nav_music配置中，server为对应的歌单&#x2F;歌手id所在的平台，如果是QQ音乐，则需要将默认值更改为tencent（其余平台同理）</li><li>若追番页面配置不成功，请参照官方开源文档手动在控制台运行（<code>hexo bangumi -u</code> ）</li><li>按照官方文档配置音乐馆时，我们会发现按照原文档（即使是原github项目）歌单信息依然无法刷新，经实验我们需要找到utils.js文件，并手动修改getCustomPlayList参数下的id与server。或者使用第二种方法将menu对应代码，做出以下更改。<br><code>menu:   我的:  音乐馆: /music/?id=1708664797&amp;server=tencent || icon-music</code></li><li>主题色配置在主题配置文件的theme_color: 改，其他颜色相关的都在你 博客目录&#x2F;themes&#x2F;anzhiyu&#x2F;source&#x2F;css&#x2F;_global&#x2F;index.styl 这个styl里更改，白天和夜间大部分都各有一个</li><li>主页轮播图有阴影不好看？做出以下修改即可：找到以下文件<br>myblogs\themes\anzhiyu\source\css_extra\home_top\top_group_banner.css<br>修改以下代码即可，box-shadow即是阴影。<br><code>.topGroup .todayCard::after {   position: absolute;      content: &quot;&quot;;   width: 100%;   height: 100%;   top: 0;   left: 0;   box-shadow: 0 -109px 133px -9px #000000 inset; } </code></li></ol><h2 id="以下为本人修改过的代码"><a href="#以下为本人修改过的代码" class="headerlink" title="以下为本人修改过的代码"></a>以下为本人修改过的代码</h2><h3 id="1-关于主题"><a href="#1-关于主题" class="headerlink" title="1. 关于主题"></a>1. 关于主题</h3><ol><li><p>在index.styl文件中包含着大量主题的配色，本人更加喜欢橙黄色于是有以下变动<br><code>--anzhiyu-theme-op-deep: #4259efdd;</code></p></li><li><p>在anzhiyu文件下的_config.yml文件中，可通过修改<br><code>rror_404:   enable: true   subtitle: &quot;这个废物还没有更新这样的文章呢 （我会努力更新哒！ /(ㄒoㄒ)/~~）&quot;   background: https://bu.dusays.com/2023/05/08/645907596997d.gif</code><br>进而修改404图片</p></li><li><p>myblogs\themes\anzhiyu\source\css_extra\console\console.css路径下box-shadow参数修改为#e6c083，这样及时更新轮播图图片也可以自己调整阴影效果。</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
       
     </entry>
     
+    
+  
+  
     
     
     <entry>
@@ -185,28 +174,6 @@
       <url>/about/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>air-conditioner</title>
-      <link href="/air-conditioner/index.html"/>
-      <url>/air-conditioner/index.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>终于为博客安装上了便携小空调</p></blockquote><style>.copyright-box a {  border-bottom: none !important;  padding: 0 !important;}</style><div id="air-conditioner-vue"></div><script defer data-pjax src='https://npm.elemecdn.com/anzhiyu-air-conditioner@1.0.1/index.3f125bc6.js'></script>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/css/custom.css"/>
-      <url>/css/custom.css</url>
-      
-        <content type="html"><![CDATA[#web_bg {    background-size: 20rem;    background-image: url(https://blog.xiowo.net//img/bg.svg) !important;    background-repeat: initial}/* 夜间网站背景 */[data-theme=dark] #web_bg {    background-size: 100rem;    background-image: url(https://blog.xiowo.net//img/bg-dark.jpg) !important;}]]></content>
       
     </entry>
     
@@ -224,9 +191,42 @@
     
     
     <entry>
-      <title>link</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/css/custom.css"/>
+      <url>/css/custom.css</url>
+      
+        <content type="html"><![CDATA[#web_bg {    background-size: 20rem;    background-image: url(https://blog.xiowo.net//img/bg.svg) !important;    background-repeat: initial}/* 夜间网站背景 */[data-theme=dark] #web_bg {    background-size: 100rem;    background-image: url(https://blog.xiowo.net//img/bg-dark.jpg) !important;}]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>air-conditioner</title>
+      <link href="/air-conditioner/index.html"/>
+      <url>/air-conditioner/index.html</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>终于为博客安装上了便携小空调</p></blockquote><style>.copyright-box a {  border-bottom: none !important;  padding: 0 !important;}</style><div id="air-conditioner-vue"></div><script defer data-pjax src='https://npm.elemecdn.com/anzhiyu-air-conditioner@1.0.1/index.3f125bc6.js'></script>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>fcircle</title>
+      <link href="/fcircle/index.html"/>
+      <url>/fcircle/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -257,39 +257,6 @@
     
     
     <entry>
-      <title>music</title>
-      <link href="/music/index.html"/>
-      <url>/music/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>fcircle</title>
-      <link href="/fcircle/index.html"/>
-      <url>/fcircle/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>隐私政策</title>
-      <link href="/privacy/index.html"/>
-      <url>/privacy/index.html</url>
-      
-        <content type="html"><![CDATA[<p>这是我的隐私协议页面。</p><p>本网站不会收集敏感信息,仅用于学习记录,如需引用转发标注博客主页链接以及Morning即可(●’◡’●)。</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>food</title>
       <link href="/food/index.html"/>
       <url>/food/index.html</url>
@@ -301,9 +268,9 @@
     
     
     <entry>
-      <title>tags</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>link</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -312,9 +279,20 @@
     
     
     <entry>
-      <title>dailyPhoto</title>
-      <link href="/dailyPhoto/index.html"/>
-      <url>/dailyPhoto/index.html</url>
+      <title>music</title>
+      <link href="/music/index.html"/>
+      <url>/music/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>tags</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -337,6 +315,28 @@
       <title>wordScenery</title>
       <link href="/wordScenery/index.html"/>
       <url>/wordScenery/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>隐私政策</title>
+      <link href="/privacy/index.html"/>
+      <url>/privacy/index.html</url>
+      
+        <content type="html"><![CDATA[<p>这是我的隐私协议页面。</p><p>本网站不会收集敏感信息,仅用于学习记录,如需引用转发标注博客主页链接以及Morning即可(●’◡’●)。</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>dailyPhoto</title>
+      <link href="/dailyPhoto/index.html"/>
+      <url>/dailyPhoto/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
